@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Inscription</title>
+    </head>
+    <body>
+        <h1>Inscription</h1>
+        {% if error_message %} <p style="color: #ff0000"><strong>{{ error_message }}</strong></p>{% endif %}
+        <form id='register-form' action="{% url 'webprofile:register' %}" method="post">
+            {% csrf_token %}
+            <input required placeholder='Email*' name="email" type='email'/>
+            <input required placeholder='Mot de passe*' name="password" type='password'/>
+            <input placeholder='Votre plat favori' name="favorite_food" type='text'/>
+            <button type='submit'>Valider</button>
+        </form>
+        <a href="{% url 'webprofile:index' %}">Vous avez déjà un compte ? Connectez-vous !</a>
+    </body>
+</html>

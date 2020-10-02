@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Mes informations</title>
+    </head>
+    <body>
+        <div id="infos">
+            {% if error_message %} <p style="color: #ff0000"><strong>{{ error_message }}</strong></p>{% endif %}
+            <h1>Mes informations</h1>
+            <p>Mon adresse mail: {{ user.email }}</p>
+            {% if user.favorite_food != '' %}
+                <p>Mon plat préféré: {{ user.favorite_food }}</p>
+            {% endif %}
+            <button id="edit-btn">Editer mes informations</button>
+            <form action="{% url 'webprofile:logout' %}"><button class="btn button" type="submit">Se déconnecter</button></form>
+        </div>
+        <div id="modal-bg">
+            <div id="edit-modal">
+                <span id="modal-close" class="close">&times;</span>
+                <h2>Editer Mes informations</h2>
+                <form action="{% url 'webprofile:userView' %}" method="post">
+                    {% csrf_token %}
+                    <p>Adresse mail: <input name="email" value="{{ user.email }}" type="email"/></p>
+                    <p>Nourriture préférée: <input name="favorite_food" value="{{ user.favorite_food }}" type="text"/></p>
+                    <button id="validate-edit" type="submit">Enregistrer</button>
+                </form>
+            </div>    
+        </div>
+    </body>
+</html>
+
+<script>
+    console.log("hello")
+    const modalBg = document.getElementById('modal-bg')
+    const editBtn = document.getElementById('edit-btn')
+    const modalClose = document.getElementById('modal-close')
+    editBtn.addEventListener('click', event => {
+        modalBg.style.display = 'flex'
+    })
+    modalClose.addEventListener('click', event => {
+        modalBg.style.display = 'none'
+    })
+</script>
+
+<style>
+#modal-bg {
+    display: none;
+    flex-direction: column;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top:0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0,0,0);
+    background-color: rgb(0,0,0,0.4);
+}
+
+#edit-modal {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+</style>

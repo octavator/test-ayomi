@@ -1,0 +1,11 @@
+<div class="modal">
+    <h2>Editer Mes informations</h2>
+    <form action="{% url 'webprofile:userView'" method="POST">
+        <p>Adresse mail: <input value="{{ user.email }}" type="email"/></p>
+        <!-- <p>Nourriture préférée: {{ user.favorite_food }}</p> -->
+    </form>
+    <button id="validate-edit" type="submit">Enregistrer</button>
+</div>
+<script>
+
+</script>

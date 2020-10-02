@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset='utf-8'>
+        <title>Connexion</title>
+    </head>
+    <body>
+        <h1>Connexion</h1>
+        {% if error_message %} <p style="color: #ff0000"><strong>{{ error_message }}</strong></p>{% endif %}
+        <form id='login-form' method="POST" action="{% url 'webprofile:index' %}">
+            {% csrf_token %}
+            <input placeholder='Email' name="email" required type='email' />
+            <input placeholder='Mot de passe' name="password" required type='password'/>
+            <button type='submit'>Enregistrer</button>
+        </form>
+        <a href="{% url 'webprofile:register' %}">Vous n'avez pas encore de compte ? Inscrivez-vous !</a>
+    </body>
+</html>
